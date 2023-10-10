@@ -5,25 +5,25 @@ const MENU = [
         name:  "Kappa maki",
         about: "Огурец, семена сезама",
         price: "$3.50",
-        image: "images/position_1.avif"
+        image: "../images/position_1.avif"
     },
     {
         name:  "Avocado maki",
         about: "Авокадо, семена сезама",
         price: "$4.50",
-        image: "images/position_2.avif"
+        image: "../images/position_2.avif"
     },
     {
         name:  "Kappa avocado maki",
         about: "Огурец, авокадо, кремсыр, семена сезама",
         price: "$6.30",
-        image: "images/position_3.avif"
+        image: "../images/position_3.avif"
     },
     {
         name:  "Unagi maki",
         about: "Креветки, семена сезама",
         price: "$6.00",
-        image: "images/position_4.avif"
+        image: "../images/position_4.avif"
     }
 ];
 
