@@ -1,3 +1,5 @@
+const tg = window.Telegram.WebApp;
+
 const MENU = [
     {
         name:  "Kappa maki",
@@ -26,32 +28,33 @@ const MENU = [
 ];
 
 const shushiDiv = document.querySelector(".sushi");
-const buy = document.createElement("button")
+
+const buy = document.createElement("button");
 buy.id = "buy";
-buy.textContent = "Оплатить"
-shushiDiv.appendChild(buy)
+buy.textContent = "Оплатить";
+shushiDiv.appendChild(buy);
 
 for (let i = 0; i < MENU.length; i++) {
     const item = document.createElement("div");
     item.className = "item";
-
+    
     item.innerHTML = `
-        <div class="text">
-            <p>${MENU[i].name}</p>
-            <p>${MENU[i].about}</p>
-            <p>${MENU[i].price}</p>
-        </div>
-        <div class="image">
-            <img src="${MENU[i].image}">
-        </div>
-        <div class="buttons">
-            <button id="plus${i}">+</button>
-            <p id="count${i}" class="hide" >0</p>
-            <button id="minus${i}" class="hide" >-</button>
-        </div>
+    <div class="text">
+    <p>${MENU[i].name}</p>
+    <p>${MENU[i].about}</p>
+    <p>${MENU[i].price}</p>
+    </div>
+    <div class="image">
+    <img src="${MENU[i].image}">
+    </div>
+    <div class="buttons">
+    <button id="plus${i}">+</button>
+    <p id="count${i}" class="hide" >0</p>
+    <button id="minus${i}" class="hide" >-</button>
+    </div>
     `;
     shushiDiv.appendChild(item);
-
+    
     let money = document.createElement("p");
     money.classList.add("hide");
     money.textContent = "$0";
@@ -74,15 +77,23 @@ for (let i = 0; i < MENU.length; i++) {
             count.classList.add("hide");
             minus.classList.add("hide");
         }
-    })
-    // plus.addEventListener("blur", () => {
-        //     if (+count.textContent > 0) {
-            //         plus.classList.add("hide");
-    //         minus.classList.add("hide");
-    
-    //     }
-    // })
+    });
 }
 
-
-
+buy.addEventListener("click", () => {
+    const check = [];
+    const items = shushiDiv.querySelectorAll(".item");
+    for (let j = 0; j < items.length; j++) {
+        const text = items[j].querySelector(".text");
+        const buttons = items[j].querySelector(".buttons");
+        const item = {
+            name: text.children[0].textContent,
+            price: +text.children[2].textContent.slice(1),
+            count: +buttons.querySelector("p").textContent,
+            last_price: +text.children[2].textContent.slice(1) * +buttons.querySelector("p").textContent
+        };
+        check.push(item);
+    }
+    const newCheck = JSON.stringify(check);
+    tg.sendData(newCheck);
+});
