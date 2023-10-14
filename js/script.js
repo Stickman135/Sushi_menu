@@ -16,7 +16,7 @@ const MENU = [
     {
         name:  "Kappa avocado maki",
         about: "Огурец, авокадо, кремсыр, семена сезама",
-        price: "$6.30",
+        price: "$6.50",
         image: "images/position_3.avif"
     },
     {
